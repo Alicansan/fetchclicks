@@ -2,7 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply bg-black;
-  @apply text-white;
+@layer utilities {
+  body {
+    @apply bg-black;
+    @apply text-white;
+    @apply font-oswald;
+  }
 }
