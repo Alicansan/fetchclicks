@@ -5,16 +5,14 @@ import { FaPlayCircle } from 'react-icons/fa'
 const Header = () => {
   return (
     <header className='font-bebas '>
-      <div className='bg-red-600 w-max'>
-        <label
-          htmlFor=''
-          className=' flex flex-col gap-1 bg-white w-14 h-2 rounded-lg  
-           before:block before:w-14 before:h-2 before:rounded-lg before:content-["\00A0"] before:bg-white
-          after:block after:w-14 after:h-2 after:rounded-lg after:content-["\00A0"] after:bg-white '
-        >
+      <div className=''>
+        <label htmlFor='' className='  '>
           <input
             type='checkbox'
-            className='appearance-none bg-white w-14 h-2 rounded-lg border-4 -mb-[4px] outline-none '
+            className='flex flex-col appearance-none checked:bg-red-500  gap-1 bg-white w-14 h-2 rounded-lg 
+            before:mt-3 before:w-14 before:h-2 before:rounded-lg before:content-["\00A0"] before:bg-white
+           after:w-14 after:h-2 after:rounded-lg after:content-["\00A0"] after:bg-white
+             '
           />
           <aside>
             <nav></nav>
