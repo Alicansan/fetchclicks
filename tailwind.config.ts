@@ -12,6 +12,16 @@ const config: Config = {
         bebas: ["var(--font-bebas)"],
         oswald: ["var(--font-oswald)"],
       },
+      colors: {
+        'darkslategray' : '#283D3B',
+        'carribbean': '#197278',
+        'champagnepink': '#EDDDD4',
+        'persianred': '#C44536',
+        'burntumber': '#772E25',
+
+
+
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":

@@ -1,35 +1,104 @@
+'use client'
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 import { FaPlayCircle } from 'react-icons/fa'
+import { motion } from 'framer-motion'
 
 const Header = () => {
+  const [isOpen, setIsOpen] = useState(false)
+  const handleClick = () => {
+    setIsOpen(!isOpen)
+  }
+  const [query, setQuery] = useState('')
+
+  async function handleSearch(e: any) {
+    e.preveventDefault()
+  }
+
   return (
-    <header className='font-bebas '>
-      <div className=''>
-        <label htmlFor='' className='  '>
-          <input
-            type='checkbox'
-            className='flex flex-col appearance-none checked:bg-red-500  gap-1 bg-white w-14 h-2 rounded-lg 
-            before:mt-3 before:w-14 before:h-2 before:rounded-lg before:content-["\00A0"] before:bg-white
-           after:w-14 after:h-2 after:rounded-lg after:content-["\00A0"] after:bg-white
-             '
-          />
-          <aside>
-            <nav></nav>
-          </aside>
-        </label>
+    <header className='font-bebas mx-2 flex flex-row '>
+      <div className='inline'>
+        <div
+          onClick={handleClick}
+          className='flex flex-col justify-center items-center w-12 h-12 md:hidden top-0 left-0  z-40   bg-transparent hover:cursor-pointer'
+        >
+          <button>
+            <div className=''>
+              <span
+                className={`bg-champagnepink block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm my-0.5
+          ${
+            isOpen
+              ? 'rotate-45 translate-y-1'
+              : '-translate-y-0.5'
+          } `}
+              ></span>
+              <span
+                className={`bg-champagnepink block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm my-0.5
+          ${
+            isOpen ? 'opacity-0' : 'opacity-100  '
+          }`}
+              ></span>
+              <span
+                className={`bg-champagnepink block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm my-0.5
+          ${
+            isOpen
+              ? '-rotate-45 -translate-y-1'
+              : 'translate-y-0.5'
+          } `}
+              ></span>
+            </div>
+          </button>
+        </div>
+        <div
+          className={` shadow-2xl bg-persianred flex- flex-col   p-12 absolute top-0 left-0 h-full -z-10 md:hidden ${
+            isOpen
+              ? 'ease-out duration-300'
+              : '-translate-x-60 ease-in duration-300'
+          }`}
+        >
+          <nav className='flex flex-col mt-10 items-center text-2xl gap-3'>
+            <Link href={'/'}>Movies</Link>
+            <Link href={'/'}>Series</Link>
+            <Link href={'/'}>
+              FETCHCLICKS KIDS
+            </Link>
+          </nav>
+        </div>
       </div>
-      <div className='hidden'>
+
+      <div className=' flex flex-row mt-1.5  justify-between text-2xl w-full'>
         <Link
-          href={'/'}
-          className='flex items-center gap-2  '
+          href={`${isOpen ? '' : '/'}`}
+          className='flex items-center gap-2 '
         >
           <FaPlayCircle className=' ' />
-          <p className='text-2xl font-semibold tracking-[2px] ml-4  inline align-middle'>
+          <p className='text-2xl font-semibold tracking-[2px] mt-1  inline align-middle'>
             FETCHCLICKS
           </p>
         </Link>
-        <nav className=''>
+        <div className=''>
+          <form
+            onSubmit={handleSearch}
+            className='mt-1 hidden md:flex '
+          >
+            <input
+              type='text'
+              value={query}
+              onChange={(e) =>
+                setQuery(e.target.value)
+              }
+              className='bg-carribbean placeholder:text-champagnepink pl-4 pt-1 placeholder:font-oswald rounded-md  '
+              placeholder='Search...'
+            />
+            <button
+              className='ml-3 bg-darkslategray p-2 px-5 rounded-md'
+              type='submit'
+            >
+              Search
+            </button>
+          </form>
+        </div>
+        <nav className=' gap-12  md:flex hidden mt-3'>
           <Link href={'/'}>Movies</Link>
           <Link href={'/'}>Series</Link>
           <Link href={'/'}>FETCHCLICKS KIDS</Link>

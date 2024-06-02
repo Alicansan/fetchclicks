@@ -4,8 +4,8 @@
 
 @layer utilities {
   body {
-    @apply bg-black;
-    @apply text-white;
+    @apply bg-burntumber;
+    @apply text-champagnepink;
     @apply font-oswald;
   }
 }

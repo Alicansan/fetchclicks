@@ -35,9 +35,9 @@ export default function RootLayout({
       lang='en'
       className={`${bebas.variable} ${oswald.variable}`}
     >
-      <body>
+      <body className='m-4'>
         <Header />
-        {children}
+        <main>{children}</main>
         <Foooter />
       </body>
     </html>
