@@ -21,6 +21,7 @@ export default async function Home({
     const data = await res.json()
 
     if (!res.ok) {
+      console.error('API Error:', data) // Log full response for debugging
       throw new Error(
         `Failed to fetch data: ${data.status_message}`
       )
@@ -28,7 +29,17 @@ export default async function Home({
 
     const results = data.results
 
-    return <div></div> // Your component logic here
+    return (
+      <div>
+        {/* Your component logic here */}
+        {results &&
+          results.map((result: any) => (
+            <div key={result.id}>
+              {result.title}
+            </div>
+          ))}
+      </div>
+    )
   } catch (error) {
     console.error('Error fetching data:', error)
     throw new Error('Failed to fetch data')
