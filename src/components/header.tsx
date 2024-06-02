@@ -57,22 +57,20 @@ const Header = () => {
           }`}
         >
           <nav className='flex flex-col mt-10 items-center text-2xl gap-3'>
-            <Link href={'/'}>Movies</Link>
+            <Link href={'/'}>Trending</Link>
+            <Link href={'/'}>Top Rated</Link>
             <Link href={'/'}>Series</Link>
-            <Link href={'/'}>
-              FETCHCLICKS KIDS
-            </Link>
           </nav>
         </div>
       </div>
 
-      <div className=' flex flex-row mt-1.5  justify-between text-2xl w-full'>
+      <div className=' flex flex-row mt-1.5  justify-between text-2xl w-full drop-shadow-2xl'>
         <Link
           href={`${isOpen ? '' : '/'}`}
-          className='flex items-center gap-2 '
+          className='flex items-center gap-2  '
         >
           <FaPlayCircle className=' ' />
-          <p className='text-2xl font-semibold tracking-[2px] mt-1  inline align-middle'>
+          <p className='text-2xl font-semibold tracking-[2px] mt-1  inline align-middle [text-shadow:_5px_5px_0_rgb(0_0_0_/_90%)]'>
             FETCHCLICKS
           </p>
         </Link>
@@ -99,9 +97,24 @@ const Header = () => {
           </form>
         </div>
         <nav className=' gap-12  md:flex hidden mt-3'>
-          <Link href={'/'}>Movies</Link>
-          <Link href={'/'}>Series</Link>
-          <Link href={'/'}>FETCHCLICKS KIDS</Link>
+          <Link
+            href={'/'}
+            className='[text-shadow:_5px_5px_0_rgb(0_0_0_/_90%)]'
+          >
+            Trending
+          </Link>
+          <Link
+            href={'/'}
+            className='[text-shadow:_5px_5px_0_rgb(0_0_0_/_90%)] text-nowrap'
+          >
+            Top Rated
+          </Link>
+          <Link
+            href={'/'}
+            className='[text-shadow:_5px_5px_0_rgb(0_0_0_/_90%)]'
+          >
+            Series
+          </Link>
         </nav>
       </div>
     </header>
