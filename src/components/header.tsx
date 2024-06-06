@@ -16,14 +16,15 @@ const Header = () => {
   }
 
   return (
-    <header className='font-bebas mx-2 flex flex-row '>
-      <div className='inline'>
+    <header className='font-bebas mx-2 flex flex-row z-50  fixed '>
+      {/* Sidebar */}
+      <div className=''>
         <div
           onClick={handleClick}
-          className='flex flex-col justify-center items-center w-12 h-12 md:hidden top-0 left-0  z-40   bg-transparent hover:cursor-pointer'
+          className='flex flex-col justify-center items-center w-12 h-12 md:hidden top-0 left-0   bg-transparent hover:cursor-pointer'
         >
           <button>
-            <div className=''>
+            <div className='relative'>
               <span
                 className={`bg-champagnepink block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm my-0.5
           ${
@@ -50,7 +51,7 @@ const Header = () => {
           </button>
         </div>
         <div
-          className={` shadow-2xl bg-persianred flex- flex-col   p-12 absolute top-0 left-0 h-full -z-10 md:hidden ${
+          className={` shadow-2xl bg-persianred flex- flex-col pt-20  fixed   top-0 left-0 h-[2000px] px-12 -z-10 md:hidden ${
             isOpen
               ? 'ease-out duration-300'
               : '-translate-x-60 ease-in duration-300'
@@ -63,6 +64,7 @@ const Header = () => {
           </nav>
         </div>
       </div>
+      {/* Sidebar */}
 
       <div className=' flex flex-row mt-1.5  justify-between text-2xl w-full drop-shadow-2xl'>
         <Link
