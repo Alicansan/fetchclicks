@@ -1,10 +1,12 @@
+import Banner from '@/components/Banner'
 import DataFetcher from '@/components/DataFetcher'
 import React from 'react'
 
 function page() {
   return (
     <div>
-      <DataFetcher />
+      {/* <DataFetcher /> */}
+      <Banner />
     </div>
   )
 }
