@@ -2,11 +2,7 @@ import DataFetcher from '@/components/DataFetcher'
 import React from 'react'
 
 function page() {
-  return (
-    <div>
-      <DataFetcher />
-    </div>
-  )
+  return <div>{/* <DataFetcher /> */}</div>
 }
 
 export default page
