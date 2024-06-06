@@ -2,10 +2,9 @@ import DataFetcher from '@/components/DataFetcher'
 import React from 'react'
 
 function page() {
-  
+  return (
     <div>
-      {/* <DataFetcher /> */}
-      
+      <DataFetcher />
     </div>
   )
 }

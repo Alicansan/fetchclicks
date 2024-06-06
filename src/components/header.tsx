@@ -16,9 +16,9 @@ const Header = () => {
   }
 
   return (
-    <header className='font-bebas mx-2 flex flex-row z-50  fixed '>
+    <header className='font-bebas mx-2 flex flex-row z-50  '>
       {/* Sidebar */}
-      <div className=''>
+      <div className='fixed'>
         <div
           onClick={handleClick}
           className='flex flex-col justify-center items-center w-12 h-12 md:hidden top-0 left-0   bg-transparent hover:cursor-pointer'
@@ -51,13 +51,13 @@ const Header = () => {
           </button>
         </div>
         <div
-          className={` shadow-2xl bg-persianred flex- flex-col pt-20  fixed   top-0 left-0 h-[2000px] px-12 -z-10 md:hidden ${
+          className={`  shadow-2xl bg-persianred flex- flex-col pt-20  fixed   top-0 left-0 h-[2000px] px-12 -z-10 md:hidden ${
             isOpen
               ? 'ease-out duration-300'
               : '-translate-x-60 ease-in duration-300'
           }`}
         >
-          <nav className='flex flex-col mt-10 items-center text-2xl gap-3'>
+          <nav className='flex flex-col mt-10 items-center text-2xl '>
             <Link href={'/'}>Trending</Link>
             <Link href={'/'}>Top Rated</Link>
             <Link href={'/'}>Series</Link>
@@ -66,13 +66,13 @@ const Header = () => {
       </div>
       {/* Sidebar */}
 
-      <div className=' flex flex-row mt-1.5  justify-between text-2xl w-full drop-shadow-2xl'>
+      <div className=' flex flex-row mt-1.5 ml-12 md:ml-0  justify-between text-2xl w-full drop-shadow-2xl '>
         <Link
           href={`${isOpen ? '' : '/'}`}
           className='flex items-center gap-2  '
         >
           <FaPlayCircle className=' ' />
-          <p className='text-2xl font-semibold tracking-[2px] mt-1  inline align-middle [text-shadow:_5px_5px_0_rgb(0_0_0_/_90%)]'>
+          <p className=' text-2xl font-semibold tracking-[2px] mt-1  inline align-middle [text-shadow:_5px_5px_0_rgb(0_0_0_/_90%)]'>
             FETCHCLICKS
           </p>
         </Link>
