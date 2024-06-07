@@ -1,3 +1,11 @@
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+} from './ui/carousel'
+
 const GetData = async () => {
   const key = process.env.API_KEY
 
@@ -29,32 +37,55 @@ const GetData = async () => {
 
     console.log(results)
 
-    return { movie, truncate }
+    return { results, movie, truncate }
   } catch (error) {
     console.error(
       'Failed to catch upcoming movies',
       error
     )
-    return { movie: null, truncate: null }
+    return {
+      results: [],
+      movie: null,
+      truncate: null,
+    }
   }
 }
 
 async function Banner() {
-  const { movie, truncate } = await GetData()
+  const { results, movie, truncate } =
+    await GetData()
   return (
-    <div>
-      {movie && (
-        <div>
-          <img
-            src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
-          />
-
-          <div>
-            <h1>{movie.title}</h1>
-            <p>{movie.overview}</p>
-          </div>
-        </div>
-      )}
+    <div className=' md:py-6 md:px-1 bg-none  relative z-10'>
+      <Carousel className='md:mx-12'>
+        {movie && (
+          <>
+            <CarouselContent>
+              {results.map((item: any) => (
+                <CarouselItem className='relative flex '>
+                  <img
+                    src={`https://image.tmdb.org/t/p/original/${item.backdrop_path}`}
+                  />
+                  <div className='absolute   z-20 bottom-[10%] left-[1%] p-4 bg-gradient-to-t from-black to-transparent'>
+                    <h1 className='font-bebas text-5xl uppercase drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]'>
+                      {item.title}
+                    </h1>
+                    <p>{item.release_date}</p>
+                    <p>
+                      TMDB Score{' '}
+                      {item.vote_average}
+                    </p>
+                    <p className='font-extralight'>
+                      {item.overview}
+                    </p>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className='hidden md:flex' />
+            <CarouselNext className='hidden md:flex' />
+          </>
+        )}
+      </Carousel>
     </div>
   )
 }

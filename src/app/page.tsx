@@ -4,7 +4,7 @@ import React from 'react'
 
 function page() {
   return (
-    <div>
+    <div className='overflow-hidden mt-7 md:w-full md:mx-auto md:max-w-[89rem] md:h-full'>
       {/* <DataFetcher /> */}
       <Banner />
     </div>

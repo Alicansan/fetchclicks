@@ -16,7 +16,7 @@ const Header = () => {
   }
 
   return (
-    <header className='font-bebas mx-2 flex flex-row z-50  '>
+    <header className='relative z-50 font-bebas px-2 flex flex-row  overflow-hidden  md:w-full md:mx-auto md:max-w-[89rem] md:h-full  '>
       {/* Sidebar */}
       <div className='fixed'>
         <div
