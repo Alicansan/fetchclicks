@@ -60,26 +60,31 @@ async function Banner() {
         {movie && (
           <>
             <CarouselContent>
-              {results.map((item: any) => (
-                <CarouselItem className='relative flex '>
-                  <img
-                    src={`https://image.tmdb.org/t/p/original/${item.backdrop_path}`}
-                  />
-                  <div className='absolute   z-20 bottom-[10%] left-[1%] p-4 bg-gradient-to-t from-black to-transparent'>
-                    <h1 className='font-bebas text-5xl uppercase drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]'>
-                      {item.title}
-                    </h1>
-                    <p>{item.release_date}</p>
-                    <p>
-                      TMDB Score{' '}
-                      {item.vote_average}
-                    </p>
-                    <p className='font-extralight'>
-                      {item.overview}
-                    </p>
-                  </div>
-                </CarouselItem>
-              ))}
+              {results.map(
+                (item: any, index: number) => (
+                  <CarouselItem
+                    key={index}
+                    className='relative flex '
+                  >
+                    <img
+                      src={`https://image.tmdb.org/t/p/original/${item.backdrop_path}`}
+                    />
+                    <div className='absolute   z-20 bottom-[10%] left-[1%] p-4 bg-gradient-to-t from-black to-transparent'>
+                      <h1 className='font-bebas text-5xl uppercase drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]'>
+                        {item.title}
+                      </h1>
+                      <p>{item.release_date}</p>
+                      <p>
+                        TMDB Score{' '}
+                        {item.vote_average}
+                      </p>
+                      <p className='font-extralight'>
+                        {item.overview}
+                      </p>
+                    </div>
+                  </CarouselItem>
+                )
+              )}
             </CarouselContent>
             <CarouselPrevious className='hidden md:flex' />
             <CarouselNext className='hidden md:flex' />
