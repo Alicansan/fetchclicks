@@ -4,7 +4,7 @@ import { NextResponse } from "next/server"
 
 
  
- export async function getMovie() {
+ export async function GET() {
    try {
     const movieResponse = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${key}`)
     if (!movieResponse.ok) {

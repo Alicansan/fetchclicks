@@ -4,7 +4,7 @@ import { NextResponse } from "next/server"
 
 
  
- export async function getTv() {
+ export async function GET() {
    try {
     const tvResponse = await fetch(`https://api.thetvdb.org/3/discover/tv?api_key=${key}`)
     if (!tvResponse.ok) {
