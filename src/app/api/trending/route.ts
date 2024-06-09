@@ -1,12 +1,21 @@
-import { NextResponse } from 'next/server'
-import React from 'react'
+import { NextResponse } from "next/server"
 
-export async function GET(request: Request) {
-    const {searchParams} = new URL(request.url)
-    // const name = searchParams.get('name')
-    // const instrument = searchParams.get('instrument')
-    const obj = Object.fromEntries(searchParams.entries())
+ const key = process.env.API_KEY
 
-//return NextResponse.json({name, instrument})
-  return NextResponse.json(obj)
-}
+
+ 
+ export async function GET() {
+   try {
+    const trendingResponse = await fetch(`https://api.themoviedb.org/3/trending/all/week?api_key=${key}`)
+    if (!trendingResponse.ok) {
+      throw new Error(`Http Error! Status: ${trendingResponse.status}` )
+    }
+    const trendingData = await trendingResponse.json()
+    
+    return NextResponse.json(trendingData)
+   } catch (error) {
+    console.log(error)
+    return NextResponse.json({error: "Failed to fetch data"}, {status:500})
+   }
+ } 
+ 

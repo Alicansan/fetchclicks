@@ -9,16 +9,10 @@ import {
 const GetData = async () => {
   const key = process.env.API_KEY
 
-  const truncate = (str: string, num: number) => {
-    if (str.length > num) {
-      return str.slice(0, num)
-    } else {
-      return str
-    }
-  }
   try {
     const response = await fetch(
-      `https://api.themoviedb.org/3/movie/upcoming?api_key=${key}&language=en-US&page=1`
+      `https://api.themoviedb.org/3/movie/upcoming?api_key=${key}&language=en-US`,
+      { cache: 'no-cache' }
     )
     if (!response.ok) {
       throw new Error(
@@ -26,34 +20,23 @@ const GetData = async () => {
       )
     }
     const data = await response.json()
-
     const results = data.results
-
     const randomIndex = Math.floor(
       Math.random() * results.length
     )
-
     const movie = results[randomIndex]
-
-    console.log(results)
-
-    return { results, movie, truncate }
+    return { results, movie }
   } catch (error) {
     console.error(
-      'Failed to catch upcoming movies',
+      'Failed to catch upcoming movies list',
       error
     )
-    return {
-      results: [],
-      movie: null,
-      truncate: null,
-    }
+    return { results: [], movie: null }
   }
 }
 
 async function Banner() {
-  const { results, movie, truncate } =
-    await GetData()
+  const { results, movie } = await GetData()
   return (
     <div className=' md:py-6 md:px-1 bg-none  relative z-10'>
       <Carousel className='md:mx-12'>
@@ -69,7 +52,7 @@ async function Banner() {
                     <img
                       src={`https://image.tmdb.org/t/p/original/${item.backdrop_path}`}
                     />
-                    <div className='absolute   z-20 bottom-[10%] left-[1%] p-4 bg-gradient-to-t from-black to-transparent'>
+                    <div className='absolute w-full  z-20 bottom-[0%] left-[1%] p-4 bg-gradient-to-t from-black to-transparent'>
                       <h1 className='font-bebas text-5xl uppercase drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]'>
                         {item.title}
                       </h1>
@@ -78,7 +61,7 @@ async function Banner() {
                         TMDB Score{' '}
                         {item.vote_average}
                       </p>
-                      <p className='font-extralight'>
+                      <p className='font-extralight hidden md:flex mt-12'>
                         {item.overview}
                       </p>
                     </div>

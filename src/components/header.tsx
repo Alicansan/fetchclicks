@@ -51,7 +51,7 @@ const Header = () => {
           </button>
         </div>
         <div
-          className={`  shadow-2xl bg-persianred flex- flex-col pt-20  fixed   top-0 left-0 h-[2000px] px-12 -z-10 md:hidden ${
+          className={`   bg-persianred flex- flex-col pt-20  fixed   top-0 left-0 h-[2000px] px-12 -z-10 md:hidden ${
             isOpen
               ? 'ease-out duration-300'
               : '-translate-x-60 ease-in duration-300'
@@ -66,7 +66,7 @@ const Header = () => {
       </div>
       {/* Sidebar */}
 
-      <div className=' flex flex-row mt-1.5 ml-12 md:ml-0  justify-between text-2xl w-full drop-shadow-2xl '>
+      <div className=' flex flex-row mt-1.5 ml-12 md:ml-0  justify-between text-2xl w-full  '>
         <Link
           href={`${isOpen ? '' : '/'}`}
           className='flex items-center gap-2  '

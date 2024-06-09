@@ -1,12 +1,14 @@
 import Banner from '@/components/Banner'
 import DataFetcher from '@/components/DataFetcher'
+import Tabs from '@/components/Tabs'
+
 import React from 'react'
 
 function page() {
   return (
     <div className='overflow-hidden mt-7 md:w-full md:mx-auto md:max-w-[89rem] md:h-full'>
-      {/* <DataFetcher /> */}
       <Banner />
+      <Tabs />
     </div>
   )
 }
