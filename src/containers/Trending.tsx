@@ -1,5 +1,7 @@
+import { TrendingResponse } from '@/types'
+
 interface TrendingProp {
-  trendingData: any
+  trendingData: TrendingResponse
 }
 
 const Trending = ({
@@ -7,9 +9,11 @@ const Trending = ({
 }: TrendingProp) => {
   return (
     <div>
-      {trendingData.results.map((item: any) => (
+      {trendingData.results.map((item) => (
         <div key={item.id}>
-          <h3>{item.title || item.name}</h3>
+          <h3>
+            {item.title || item.name || 'N/A'}
+          </h3>
           <p>{item.overview}</p>
         </div>
       ))}

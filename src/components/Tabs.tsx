@@ -1,26 +1,92 @@
 'use client'
+import Movies from '@/containers/Movies'
 import Trending from '@/containers/Trending'
-import { useState, useEffect } from 'react'
+import Tv from '@/containers/Tv'
+import { cn } from '@/lib/utils'
+import {
+  TrendingResponse,
+  MovieResponse,
+  TvResponse,
+} from '@/types'
+import {
+  useState,
+  useEffect,
+  Dispatch,
+  SetStateAction,
+} from 'react'
+
+const tabItems = [
+  { title: 'Trending' },
+  { title: 'Movie' },
+  { title: 'TV' },
+]
 
 const Tabs = () => {
   const [openTab, setOpenTab] = useState(1)
+
+  const [
+    isLoadingTrendingData,
+    setisLoadingTrendingData,
+  ] = useState(false)
+  console.log(isLoadingTrendingData)
   const [trendingData, setTrendingData] =
-    useState<any>(null)
+    useState<TrendingResponse | null>(null)
+
+  const [movieData, setMovieData] =
+    useState<MovieResponse | null>(null)
+
+  const [tvData, setTvData] =
+    useState<TvResponse | null>(null)
 
   useEffect(() => {
     const fetchTrending = async () => {
       try {
+        setisLoadingTrendingData(true)
         const response = await fetch(
           '/api/trending'
         )
-        const trendingData = await response.json()
-        console.log(trendingData)
+        const trendingData =
+          (await response.json()) as TrendingResponse
+        console.log('trending', trendingData)
         setTrendingData(trendingData)
+      } catch (error) {
+        console.log(error)
+      } finally {
+        setisLoadingTrendingData(false)
+      }
+    }
+    fetchTrending()
+  }, [])
+
+  useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        const response = await fetch(
+          '/api/movies'
+        )
+        const movieData =
+          (await response.json()) as MovieResponse
+        console.log('movies', movieData)
+        setMovieData(movieData)
       } catch (error) {
         console.log(error)
       }
     }
-    fetchTrending()
+    fetchMovies()
+  }, [])
+
+  useEffect(() => {
+    const fetchTv = async () => {
+      try {
+        const response = await fetch('/api/tv')
+        const tvData =
+          (await response.json()) as TvResponse
+        setTvData(tvData)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    fetchTv()
   }, [])
 
   return (
@@ -28,63 +94,18 @@ const Tabs = () => {
       <div className='flex justify-center'>
         <div className='w-full'>
           <ul
-            className='flex  pt-3 pb-4 justify-center gap-12 '
+            className='flex pt-3 pb-4 justify-center gap-12 '
             role='tablist'
           >
-            <li className='  '>
-              <a
-                className={
-                  '  px-5 py-3 ' + (openTab === 1)
-                    ? ''
-                    : ''
-                }
-                onClick={(e) => {
-                  e.preventDefault()
-                  setOpenTab(1)
-                }}
-                data-toggle='tab'
-                href='#link1'
-                role='tablist'
-              >
-                Trending
-              </a>
-            </li>
-            <li className='  '>
-              <a
-                className={
-                  ' px-5 py-3 ' + (openTab === 2)
-                    ? ''
-                    : ''
-                }
-                onClick={(e) => {
-                  e.preventDefault()
-                  setOpenTab(2)
-                }}
-                data-toggle='tab'
-                href='#link2'
-                role='tablist'
-              >
-                Movie
-              </a>
-            </li>
-            <li className='  '>
-              <a
-                className={
-                  ' px-5 py-3 ' + (openTab === 3)
-                    ? ''
-                    : ''
-                }
-                onClick={(e) => {
-                  e.preventDefault()
-                  setOpenTab(3)
-                }}
-                data-toggle='tab'
-                href='#link3'
-                role='tablist'
-              >
-                TV
-              </a>
-            </li>
+            {tabItems.map((item, index) => (
+              <TabHeaderItem
+                key={index}
+                index={index + 1}
+                openTab={openTab}
+                setOpenTab={setOpenTab}
+                title={item.title}
+              />
+            ))}
           </ul>
           <div className='relative grid  justify-center border-2 '>
             <div className='px-4 py-5 flex '>
@@ -96,12 +117,16 @@ const Tabs = () => {
                       : 'hidden'
                   }
                 >
-                  {trendingData ? (
-                    <Trending
-                      trendingData={trendingData}
-                    />
+                  {isLoadingTrendingData ? (
+                    <p>Loading</p>
                   ) : (
-                    <p>loading</p>
+                    trendingData && (
+                      <Trending
+                        trendingData={
+                          trendingData
+                        }
+                      />
+                    )
                   )}
                 </div>
                 <div
@@ -111,7 +136,13 @@ const Tabs = () => {
                       : 'hidden'
                   }
                 >
-                  <p>content 2</p>
+                  {movieData ? (
+                    <Movies
+                      movieData={movieData}
+                    />
+                  ) : (
+                    <p>Loading</p>
+                  )}
                 </div>
                 <div
                   className={
@@ -120,7 +151,11 @@ const Tabs = () => {
                       : 'hidden'
                   }
                 >
-                  <p>content 3</p>
+                  {tvData ? (
+                    <Tv tvData={tvData} />
+                  ) : (
+                    <p>Loading</p>
+                  )}
                 </div>
               </div>
             </div>
@@ -132,3 +167,34 @@ const Tabs = () => {
 }
 
 export default Tabs
+
+interface TabHeaderProp {
+  title: string
+  index: number
+  openTab: number
+  setOpenTab: Dispatch<SetStateAction<number>>
+}
+const TabHeaderItem = ({
+  title,
+  index,
+  openTab,
+  setOpenTab,
+}: TabHeaderProp) => {
+  return (
+    <li>
+      <button
+        className={cn('px-5 py-3', {
+          'text-red-300': openTab === index,
+        })}
+        onClick={(e) => {
+          e.preventDefault()
+          setOpenTab(index)
+        }}
+        data-toggle='tab'
+        role='tablist'
+      >
+        {title}
+      </button>
+    </li>
+  )
+}

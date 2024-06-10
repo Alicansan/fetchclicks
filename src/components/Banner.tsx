@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import {
   Carousel,
   CarouselContent,
@@ -49,7 +50,11 @@ async function Banner() {
                     key={index}
                     className='relative flex '
                   >
-                    <img
+                    <Image
+                      className='w-full h-auto object-cover'
+                      width={1200}
+                      height={675}
+                      alt='title'
                       src={`https://image.tmdb.org/t/p/original/${item.backdrop_path}`}
                     />
                     <div className='absolute w-full  z-20 bottom-[0%] left-[1%] p-4 bg-gradient-to-t from-black to-transparent'>
