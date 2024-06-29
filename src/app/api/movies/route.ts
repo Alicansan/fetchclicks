@@ -15,7 +15,10 @@ https://api.themoviedb.org/3/trending/movie/week?api_key=${key}`)
     console.log(movieData)
     return NextResponse.json(movieData)
   } catch (error) {
-    console.log(error)
+    console.error(
+      'Error fetching trending movies:',
+      error
+    )
     return NextResponse.json(
       { error: 'Failed to fetch data' },
       { status: 500 }

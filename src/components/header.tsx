@@ -16,7 +16,7 @@ const Header = () => {
   }
 
   return (
-    <header className='relative z-50 font-bebas px-2 flex flex-row  overflow-hidden  md:w-full md:mx-auto md:max-w-[89rem] md:h-full  '>
+    <header className='relative z-50 font-bebas px-2 flex flex-row  overflow-hidden  md:w-full md:mx-auto  md:h-full bg-persianred '>
       {/* Sidebar */}
       <div className='fixed'>
         <div
@@ -66,13 +66,13 @@ const Header = () => {
       </div>
       {/* Sidebar */}
 
-      <div className=' flex flex-row mt-1.5 ml-12 md:ml-0  justify-between text-2xl w-full  '>
+      <div className=' flex flex-row my-1.5  gap-12   justify-center lg:justify-evenly text-2xl w-full  '>
         <Link
           href={`${isOpen ? '' : '/'}`}
           className='flex items-center gap-2  '
         >
           <FaPlayCircle className=' ' />
-          <p className=' text-2xl font-semibold tracking-[2px] mt-1  inline align-middle [text-shadow:_5px_5px_0_rgb(0_0_0_/_90%)]'>
+          <p className='relative text-2xl font-semibold tracking-[2px] mt-1  inline align-middle [text-shadow:_5px_5px_0_rgb(0_0_0_/_90%)]'>
             FETCHCLICKS
           </p>
         </Link>
@@ -98,7 +98,7 @@ const Header = () => {
             </button>
           </form>
         </div>
-        <nav className=' gap-12  md:flex hidden mt-3'>
+        <nav className=' gap-5  md:flex hidden mt-3 ml-2'>
           <Link
             href={'/'}
             className='[text-shadow:_5px_5px_0_rgb(0_0_0_/_90%)]'
