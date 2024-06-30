@@ -96,7 +96,7 @@ const Tabs = () => {
       <div className='flex justify-center'>
         <div className='w-full'>
           <ul
-            className='flex pt-3 pb-4 justify-center gap-12 '
+            className='flex pt-3 pb-4 justify-center gap-12 text-2xl '
             role='tablist'
           >
             {tabItems.map((item, index) => (
@@ -109,7 +109,7 @@ const Tabs = () => {
               />
             ))}
           </ul>
-          <div className='relative grid  justify-center border-2 '>
+          <div className='relative grid  justify-center border-t-2'>
             <div className='px-4 py-5 flex '>
               <div className=''>
                 <div

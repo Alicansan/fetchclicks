@@ -7,7 +7,7 @@ interface MoviesProp {
 
 const Movies = ({ movieData }: MoviesProp) => {
   return (
-    <div>
+    <div className='grid md:grid-cols-3 lg:rid-cols-4 gap-3 grid-cols-1 mb-3 lg:mb-0'>
       {movieData.results?.map((movie) => (
         <ItemCards
           key={movie.id}
