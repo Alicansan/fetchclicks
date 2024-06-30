@@ -28,7 +28,9 @@ const Tabs = () => {
     isLoadingTrendingData,
     setisLoadingTrendingData,
   ] = useState(false)
+
   console.log(isLoadingTrendingData)
+
   const [trendingData, setTrendingData] =
     useState<TrendingResponse | null>(null)
 
@@ -43,7 +45,7 @@ const Tabs = () => {
       try {
         setisLoadingTrendingData(true)
         const response = await fetch(
-          '/api/trending'
+          '/api/trending' //  Bu veri  api/trending/route.ts dosyasından çekmek için kullanılan bir NExtJS API Route sistemi
         )
         const trendingData =
           (await response.json()) as TrendingResponse
