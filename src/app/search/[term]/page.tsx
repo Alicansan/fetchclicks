@@ -36,7 +36,7 @@ function Search({ params: { term } }: Props) {
   //           headers: {
   //             accept: 'application/json',
   //             Authorization:
-  //               'Bearer 0c7f3bc0a6eed5d16f7e2de13906753a',
+  //               'Bearer ',
   //           },
   //         }
   //       )
