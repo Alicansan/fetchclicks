@@ -3,6 +3,7 @@ import Link from 'next/link'
 import React, { useState } from 'react'
 import { FaPlayCircle } from 'react-icons/fa'
 import { motion } from 'framer-motion'
+import SearchBar from './SearchBar'
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -77,26 +78,8 @@ const Header = () => {
           </p>
         </Link>
         <div className=''>
-          <form
-            onSubmit={handleSearch}
-            className='mt-1 hidden md:flex '
-          >
-            <input
-              type='text'
-              value={query}
-              onChange={(e) =>
-                setQuery(e.target.value)
-              }
-              className='bg-carribbean placeholder:text-champagnepink pl-4 pt-1 placeholder:font-oswald rounded-md  '
-              placeholder='Search...'
-            />
-            <button
-              className='ml-3 bg-darkslategray p-2 px-5 rounded-md'
-              type='submit'
-            >
-              Search
-            </button>
-          </form>
+          {/* SEARCH */}
+          <SearchBar />
         </div>
         <nav className=' gap-5  md:flex hidden mt-3 ml-2'>
           <Link

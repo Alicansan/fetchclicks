@@ -18,6 +18,9 @@ const Trending = ({
           overview={trending.overview}
           poster_path={trending.poster_path}
           vote_avarage={trending.vote_average}
+          type={
+            trending.media_type as 'movie' | 'tv'
+          }
         />
       ))}
     </div>

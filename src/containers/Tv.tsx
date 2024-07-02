@@ -16,6 +16,7 @@ const Tv = ({ tvData }: TvProp) => {
           overview={item.overview}
           poster_path={item.poster_path}
           vote_avarage={item.vote_average}
+          type='tv'
         />
       ))}
     </div>

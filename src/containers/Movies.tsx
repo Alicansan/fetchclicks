@@ -16,6 +16,7 @@ const Movies = ({ movieData }: MoviesProp) => {
           overview={movie.overview}
           poster_path={movie.poster_path}
           vote_avarage={movie.vote_average}
+          type='movie'
         />
       ))}
     </div>

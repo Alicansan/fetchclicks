@@ -6,6 +6,7 @@ import {
   CarouselPrevious,
   CarouselNext,
 } from './ui/carousel'
+import Link from 'next/link'
 
 const GetData = async () => {
   const key = process.env.API_KEY
@@ -42,7 +43,7 @@ async function Banner() {
     <div className=' md:py-6 md:px-1 bg-none  relative z-10'>
       <Carousel className='md:mx-12'>
         {movie && (
-          <>
+          <Link href='/trending'>
             <CarouselContent>
               {results.map(
                 (item: any, index: number) => (
@@ -76,7 +77,7 @@ async function Banner() {
             </CarouselContent>
             <CarouselPrevious className='hidden md:flex' />
             <CarouselNext className='hidden md:flex' />
-          </>
+          </Link>
         )}
       </Carousel>
     </div>

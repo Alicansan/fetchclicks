@@ -7,7 +7,7 @@ type Props = {
     term: string
   }
 }
-
+const key = process.env.API_KEY
 function Search({ params: { term } }: Props) {
   if (!term) notFound()
 
@@ -16,7 +16,7 @@ function Search({ params: { term } }: Props) {
   ) //hodls the search results
 
   const [isLoading, setIsLoading] =
-    useState<boolean>(true) //holds the loading state
+    useState<boolean>(false) //holds the loading state
 
   const [error, setError] = useState<
     string | null
@@ -24,40 +24,53 @@ function Search({ params: { term } }: Props) {
 
   const termToUse = decodeURI(term) //decoding the seeach term
 
-  // useEffect(() => {
-  //   const fetchSearchResults = async () => {
-  //     try {
-  //       setIsLoading(true)
+  useEffect(() => {}, [])
 
-  //       const response = await fetch(
-  //         `https://api.themoviedb.org/3/search/multi?query=${termToUse}&include_adult=false&language=en-US&page=1`,
-  //         {
-  //           method: 'GET',
-  //           headers: {
-  //             accept: 'application/json',
-  //             Authorization:
-  //               'Bearer ',
-  //           },
-  //         }
-  //       )
+  useEffect(() => {
+    const fetchSearchResults = async () => {
+      setIsLoading(true)
+      try {
+        const response = await fetch(
+          `https://api.themoviedb.org/3/search/multi?query=${termToUse}&include_adult=false&language=en-US&page=1`,
+          {
+            method: 'GET',
+            headers: {
+              accept: 'application/json',
+              Authorization: `Bearer ${key}`,
+            },
+          }
+        )
+        const data = await response.json()
+        setResults(data.results)
+      } catch (err: any) {
+        setError(err)
+        console.error(err)
+      } finally {
+        setIsLoading(false)
+      }
+    }
 
-  //       const data = await response.json()
+    // Arama isteğini yapma
+    fetchSearchResults()
+  }, [termToUse])
 
-  //       setResults(data.results)
-  //     } catch (err) {
-  //       setError(
-  //         'Arama sonuçları yüklenirken bir hata oluştu.'
-  //       )
-  //     } finally {
-  //       setIsLoading(false)
-  //     }
-  //   }
+  if (!term) notFound()
 
-  //   // Arama isteğini yapma
-  //   fetchSearchResults()
-  // }, [termToUse])
-
-  return <div>{termToUse}</div>
+  return (
+    <div>
+      <h1>{termToUse}</h1>
+      {isLoading && <p>Loading...</p>}
+      {error && <p>Error: {error}</p>}
+      {error && <p>{error}</p>}
+      <ul>
+        {results.map((result) => (
+          <li key={result.id}>
+            {result.title || result.name}
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
 }
 
 export default Search
