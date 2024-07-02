@@ -8,7 +8,7 @@ interface ItemCardsProp {
   overview: string
   poster_path: string
   vote_avarage: number
-  type: 'movie' | 'tv'
+  type?: 'movie' | 'tv' | 'person'
 }
 
 const ItemCards = ({

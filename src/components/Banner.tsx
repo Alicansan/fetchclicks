@@ -43,7 +43,7 @@ async function Banner() {
     <div className=' md:py-6 md:px-1 bg-none  relative z-10'>
       <Carousel className='md:mx-12'>
         {movie && (
-          <Link href='/trending'>
+          <>
             <CarouselContent>
               {results.map(
                 (item: any, index: number) => (
@@ -58,10 +58,14 @@ async function Banner() {
                       alt='title'
                       src={`https://image.tmdb.org/t/p/original/${item.backdrop_path}`}
                     />
-                    <div className='absolute w-full  z-20 bottom-[0%] left-[1%] p-4 bg-gradient-to-t from-black to-transparent'>
-                      <h1 className='font-bebas text-5xl uppercase drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]'>
-                        {item.title}
-                      </h1>
+                    <div className='absolute w-full  z-20 bottom-[0%] left-[1%] p-4 bg-gradient-to-t from-black to-transparent '>
+                      <Link
+                        href={`/content/movie/${item.id}`}
+                      >
+                        <h1 className='font-bebas text-5xl uppercase drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] hover:text-darkslategray inline'>
+                          {item.title}
+                        </h1>
+                      </Link>
                       <p>{item.release_date}</p>
                       <p>
                         TMDB Score{' '}
@@ -77,7 +81,7 @@ async function Banner() {
             </CarouselContent>
             <CarouselPrevious className='hidden md:flex' />
             <CarouselNext className='hidden md:flex' />
-          </Link>
+          </>
         )}
       </Carousel>
     </div>

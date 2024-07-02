@@ -62,6 +62,9 @@ const Header = () => {
             <Link href={'/'}>Trending</Link>
             <Link href={'/'}>Top Rated</Link>
             <Link href={'/'}>Series</Link>
+            <div className='mt-2'>
+              <SearchBar />
+            </div>
           </nav>
         </div>
       </div>
@@ -77,7 +80,7 @@ const Header = () => {
             FETCHCLICKS
           </p>
         </Link>
-        <div className=''>
+        <div className='hidden md:block'>
           {/* SEARCH */}
           <SearchBar />
         </div>

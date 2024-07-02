@@ -1,3 +1,4 @@
+import { MovieResult } from '@/types'
 import Image from 'next/image'
 
 interface Props {
@@ -14,8 +15,8 @@ export default async function MoviePage({
   const res = await fetch(
     `https://api.themoviedb.org/3/movie/${movieId}?api_key=${process.env.API_KEY}`
   )
-  const movie = await res.json()
-  console.log()
+  const movie = (await res.json()) as MovieResult
+  console.log(movie)
   return (
     <div>
       <Image

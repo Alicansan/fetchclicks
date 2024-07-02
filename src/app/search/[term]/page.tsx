@@ -1,76 +1,91 @@
-'use client'
-import { notFound } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import ItemCards from '@/components/ItemCards'
+import {
+  MovieResult,
+  MultiSearchResponse,
+  PersonResult,
+  TvResult,
+} from '@/types'
 
-type Props = {
+interface SearchPageProps {
   params: {
     term: string
   }
 }
-const key = process.env.API_KEY
-function Search({ params: { term } }: Props) {
-  if (!term) notFound()
 
-  const [results, setResults] = useState<any[]>(
-    []
-  ) //hodls the search results
+export default async function SearchPage({
+  params,
+}: SearchPageProps) {
+  const searchTerm = params.term
 
-  const [isLoading, setIsLoading] =
-    useState<boolean>(false) //holds the loading state
-
-  const [error, setError] = useState<
-    string | null
-  >(null) //holds the error state
-
-  const termToUse = decodeURI(term) //decoding the seeach term
-
-  useEffect(() => {}, [])
-
-  useEffect(() => {
-    const fetchSearchResults = async () => {
-      setIsLoading(true)
-      try {
-        const response = await fetch(
-          `https://api.themoviedb.org/3/search/multi?query=${termToUse}&include_adult=false&language=en-US&page=1`,
-          {
-            method: 'GET',
-            headers: {
-              accept: 'application/json',
-              Authorization: `Bearer ${key}`,
-            },
-          }
-        )
-        const data = await response.json()
-        setResults(data.results)
-      } catch (err: any) {
-        setError(err)
-        console.error(err)
-      } finally {
-        setIsLoading(false)
-      }
-    }
-
-    // Arama isteğini yapma
-    fetchSearchResults()
-  }, [termToUse])
-
-  if (!term) notFound()
+  const res = await fetch(
+    `https://api.themoviedb.org/3/search/multi?api_key=${process.env.API_KEY}&query=${searchTerm}&include_adult=false&language=en-US&page=1`
+  )
+  const data =
+    (await res.json()) as MultiSearchResponse
 
   return (
     <div>
-      <h1>{termToUse}</h1>
-      {isLoading && <p>Loading...</p>}
-      {error && <p>Error: {error}</p>}
-      {error && <p>{error}</p>}
-      <ul>
-        {results.map((result) => (
-          <li key={result.id}>
-            {result.title || result.name}
-          </li>
-        ))}
-      </ul>
+      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-3  mb-3 lg:mb-0'>
+        {data.results?.map((result) => {
+          const type = result.media_type as
+            | 'movie'
+            | 'tv'
+            | 'person'
+
+          if (type === 'tv') {
+            const tvResult = result as TvResult
+            return (
+              <ItemCards
+                key={tvResult.id}
+                id={tvResult.id}
+                title={tvResult.name}
+                overview={tvResult.overview}
+                poster_path={tvResult.poster_path}
+                vote_avarage={
+                  tvResult.vote_average
+                }
+                type='tv'
+              />
+            )
+          } else if (type === 'person') {
+            const personResult =
+              result as PersonResult
+            return (
+              <ItemCards
+                key={personResult.id}
+                id={personResult.id}
+                title={personResult.name}
+                overview={''} // PersonResult may not have an overview
+                poster_path={
+                  personResult.profile_path ?? ''
+                }
+                vote_avarage={
+                  personResult.popularity
+                }
+                type='person'
+              />
+            )
+          } else {
+            const movieResult =
+              result as MovieResult
+            return (
+              <ItemCards
+                key={movieResult.id}
+                id={movieResult.id}
+                title={movieResult.title}
+                overview={movieResult.overview}
+                poster_path={
+                  movieResult.poster_path
+                }
+                vote_avarage={
+                  movieResult.vote_average
+                }
+                type='movie'
+              />
+            )
+          }
+        })}
+      </div>
     </div>
   )
 }
-
-export default Search
