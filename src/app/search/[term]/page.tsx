@@ -24,7 +24,7 @@ export default async function SearchPage({
     (await res.json()) as MultiSearchResponse
 
   return (
-    <div>
+    <div className='container mx-auto mt-12'>
       <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-3  mb-3 lg:mb-0'>
         {data.results?.map((result) => {
           const type = result.media_type as

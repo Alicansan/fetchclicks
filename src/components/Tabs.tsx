@@ -109,7 +109,7 @@ const Tabs = () => {
               />
             ))}
           </ul>
-          <div className='relative grid  justify-center border-t-2'>
+          <div className='relative grid  justify-center border-t-4 border-champagnepink'>
             <div className='px-4 py-5 flex '>
               <div className=''>
                 <div

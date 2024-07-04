@@ -8,7 +8,7 @@ interface ItemCardsProp {
   overview: string
   poster_path: string
   vote_avarage: number
-  type?: 'movie' | 'tv' | 'person'
+  type: 'movie' | 'tv' | 'person'
 }
 
 const ItemCards = ({
@@ -24,19 +24,18 @@ const ItemCards = ({
     <Link href={`/content/${type}/${id}`}>
       <div
         key={id}
-        className='relative mb-4 lg:mb-0'
+        className='relative mb-4 lg:mb-0 border-2 border-darkslategray'
       >
         <img
           src={`https://image.tmdb.org/t/p/w500${poster_path}`}
           alt={title}
         />
-        <div className='z-20 absolute opacity-0 h-full bottom-0  p-2 bg-black bg-opacity-70 bg-gradient-to-t from-black to-transparent hover:opacity-100 transition delay-150 duration-100 ease-in-out'>
-          <div className='text-2xl mb-2 '>
-            {title || name}
-          </div>
-          <div>Rating: {vote_avarage}</div>
-          <div className='font-thin mt-2 mx-4'>
-            {overview}
+        <div className='flex flex-col justify-between z-20 absolute opacity-0 h-full bottom-0  p-2 border-2 border-darkslategray hover:border-champagnepink bg-black bg-opacity-70 bg-gradient-to-t from-black to-transparent hover:opacity-100 transition delay-150 duration-100 ease-in-out'>
+          <div className='m-2'>
+            <div>Rating: {vote_avarage}</div>
+            <div className='font-thin mt-2 mx-4'>
+              {overview}
+            </div>
           </div>
         </div>
       </div>
