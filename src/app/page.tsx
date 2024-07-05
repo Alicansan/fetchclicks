@@ -8,6 +8,7 @@ function page() {
   return (
     <div className='overflow-hidden mt-7 md:w-full md:mx-auto md:max-w-[89rem] md:h-full'>
       <Banner />
+
       <Tabs />
     </div>
   )
