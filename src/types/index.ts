@@ -6,7 +6,7 @@ export interface TrendingResponse {
 }
 
 export interface TrendingResult {
-  backdrop_path: string
+  backdrop_path: Backdrop[]
   id: number
   original_title?: string
   overview: string
@@ -72,7 +72,7 @@ export interface TvResponse {
 }
 
 export interface TvResult {
-  backdrop_path: string
+  backdrop_path: Backdrop[]
   id: number
   original_name: string
   overview: string
@@ -128,4 +128,35 @@ export interface KnownFor {
   video: boolean
   vote_average: number
   vote_count: number
+}
+
+export interface Backdrop {
+  aspect_ratio: number
+  height: number
+  iso_639_1: null | string
+  file_path: string
+  vote_average: number
+  vote_count: number
+  width: number
+}
+export interface TrailerResponse {
+  page: number
+  results: Trailer[]
+  total_pages: number
+  total_results: number
+}
+
+export interface Trailer {
+  name: string
+  key: string
+  site: Site
+  size: number
+  type: string
+  official: boolean
+  published_at: Date
+  id: string
+}
+
+export enum Site {
+  YouTube = 'YouTube',
 }

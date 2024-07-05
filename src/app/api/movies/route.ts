@@ -13,6 +13,7 @@ https://api.themoviedb.org/3/trending/movie/week?api_key=${key}`)
     }
     const movieData = await movieResponse.json()
     console.log(movieData)
+
     return NextResponse.json(movieData)
   } catch (error) {
     console.error(

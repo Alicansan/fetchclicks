@@ -29,8 +29,6 @@ const Tabs = () => {
     setisLoadingTrendingData,
   ] = useState(false)
 
-  console.log(isLoadingTrendingData)
-
   const [trendingData, setTrendingData] =
     useState<TrendingResponse | null>(null)
 
@@ -49,7 +47,7 @@ const Tabs = () => {
         )
         const trendingData =
           (await response.json()) as TrendingResponse
-        console.log('trending', trendingData)
+
         setTrendingData(trendingData)
       } catch (error) {
         console.log(error)
@@ -68,7 +66,7 @@ const Tabs = () => {
         )
         const movieData =
           (await response.json()) as MovieResponse
-        console.log('movies', movieData)
+
         setMovieData(movieData)
       } catch (error) {
         console.log(error)

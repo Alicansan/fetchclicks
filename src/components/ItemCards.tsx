@@ -9,6 +9,7 @@ interface ItemCardsProp {
   poster_path: string
   vote_avarage: number
   type: 'movie' | 'tv' | 'person'
+  backdrop_path?: string
 }
 
 const ItemCards = ({
@@ -19,6 +20,7 @@ const ItemCards = ({
   poster_path,
   vote_avarage,
   type,
+  backdrop_path,
 }: ItemCardsProp) => {
   return (
     <Link href={`/content/${type}/${id}`}>
@@ -30,12 +32,12 @@ const ItemCards = ({
           src={`https://image.tmdb.org/t/p/w500${poster_path}`}
           alt={title}
         />
-        <div className='flex flex-col justify-between z-20 absolute opacity-0 h-full bottom-0  p-2 border-2 border-darkslategray hover:border-champagnepink bg-black bg-opacity-70 bg-gradient-to-t from-black to-transparent hover:opacity-100 transition delay-150 duration-100 ease-in-out'>
-          <div className='m-2'>
+        <div className='flex flex-col justify-between z-20 absolute opacity-0 h-full bottom-0  p-2 border-2 border-darkslategray hover:border-champagnepink bg-black bg-opacity-70 bg-gradient-to-t from-black to-transparent hover:opacity-100 transition delay-150 duration-100 ease-in-out '>
+          <div className='m-2 text-clip'>
             <div>Rating: {vote_avarage}</div>
-            <div className='font-thin mt-2 mx-4'>
+            <p className='font-thin mt-2 mx-4 text-clip'>
               {overview}
-            </div>
+            </p>
           </div>
         </div>
       </div>

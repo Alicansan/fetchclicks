@@ -15,11 +15,11 @@ export default async function MoviePage({
     `https://api.themoviedb.org/3/tv/${tvId}?api_key=${process.env.API_KEY}`
   )
   const tv = await res.json()
-  console.log()
+
   return (
     <div>
       <Image
-        src={`https://image.tmdb.org/t/p/original/${tv.poster_path}`}
+        src={`https://image.tmdb.org/t/p/w500/${tv.poster_path}`}
         width={500}
         height={500}
         alt=''
