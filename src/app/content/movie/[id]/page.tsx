@@ -40,10 +40,10 @@ export default async function MoviePage({ params }: Props) {
       <ImageCarousel
         className="absolute -z-10 h-full w-full brightness-[0.2]"
         content={movieImages.backdrops?.slice(0, 5)}
-      />
-      <div className="container grid grid-cols-2 justify-around">
+      ></ImageCarousel>
+      <div className="container relative grid grid-cols-2 justify-around">
         <img
-          className="ring-5 h-auto w-auto"
+          className="ring-5 object-fit h-auto w-auto"
           src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
           alt={movie.title}
         />
@@ -51,15 +51,18 @@ export default async function MoviePage({ params }: Props) {
           <div className="flex flex-col items-end gap-2">
             <h1 className="text-4xl font-bold">{movie.title}</h1>
             <span>Released on {movie.release_date.toString()}</span>
-            <p>
+            <div>
               {movie.genres.map((genre) => (
                 <p
-                  className="my-2 bg-darkslategray px-2 text-center"
+                  className="my-2 bg-persianred px-2 text-center"
                   key={genre.id}
                 >
                   {genre.name}
                 </p>
               ))}
+            </div>
+            <p className="my-2 bg-darkslategray px-2 text-center">
+              Score: {movie.vote_average.toFixed(2)}
             </p>
           </div>
           <div>

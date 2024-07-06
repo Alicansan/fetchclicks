@@ -28,7 +28,7 @@ export default function ImageCarousel({ content, className }: Props) {
               width={image.width}
               height={image.height}
               alt=""
-              className="container"
+              className="h-[100vh] w-full object-cover"
             />
           </div>
         ))}
