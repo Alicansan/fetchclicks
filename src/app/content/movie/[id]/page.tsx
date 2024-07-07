@@ -36,7 +36,7 @@ export default async function MoviePage({ params }: Props) {
   const { movie, movieImages, movieTrailer } = await fetchMovieData(movieId);
 
   return (
-    <section className="m-auto">
+    <section className="mx-auto">
       <div className="relative mt-12">
         <ImageCarousel
           className="-z-10 hidden h-full w-full brightness-[0.2] lg:absolute lg:flex"
@@ -72,11 +72,8 @@ export default async function MoviePage({ params }: Props) {
           </div>
         </div>
       </div>
-      <div className="container mx-auto mt-12 items-center">
-        <div className="flex flex-col items-center">
-          <h1 className="mb-2 text-4xl">Videos</h1>
-          <VideoCarousel content={movieTrailer.results} />
-        </div>
+      <div className="">
+        <VideoCarousel content={movieTrailer.results} />
       </div>
     </section>
   );
