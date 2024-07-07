@@ -22,13 +22,13 @@ export default function ImageCarousel({ content, className }: Props) {
     <div className={cn(`embla`, className)} ref={emblaRef}>
       <div className="embla__container">
         {content.map((image: any, index: number) => (
-          <div className="embla__slide m-0 bg-black" key={index}>
+          <div className="embla__slide m-0" key={index}>
             <img
               src={`https://image.tmdb.org/t/p/original/${image.file_path}`}
               width={image.width}
               height={image.height}
               alt=""
-              className="h-[100vh] w-full object-cover"
+              className="h-full w-full object-cover"
             />
           </div>
         ))}

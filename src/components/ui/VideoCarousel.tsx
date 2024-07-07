@@ -6,32 +6,23 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from './carousel'
-
-import dynamic from 'next/dynamic'
-
-const YoutubeTrailer = dynamic(
-  () => import('@/components/YoutubeTrailers'),
-  {
-    loading: () => <div>Loading...</div>,
-    ssr: false,
-  }
-)
+} from "./carousel";
 
 interface Props {
-  content: any
+  content: any;
 }
 
 export default function VideoCarousel({ content }: Props) {
   return (
-    <div className='w-1/2 mx-auto'>
+    <div className="inline h-auto w-[100vw] items-center">
       <Carousel>
         <CarouselContent>
           {content.map((video: any, index: number) => (
-            <CarouselItem key={index} className=''>
-              <div key={index}>
-                <YoutubeTrailer
-                  url={`https://www.youtube.com/watch?v=${video.key}`}
+            <CarouselItem key={index}>
+              <div key={index} className="items*center flex justify-center">
+                <iframe
+                  src={`https://www.youtube.com/embed/${video.key}`}
+                  className="h-[40vh] w-[70vw] rounded-xl border-2 border-persianred md:h-[421px] md:w-[750px]"
                 />
               </div>
             </CarouselItem>
@@ -41,5 +32,5 @@ export default function VideoCarousel({ content }: Props) {
         <CarouselNext />
       </Carousel>
     </div>
-  )
+  );
 }
