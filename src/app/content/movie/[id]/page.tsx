@@ -72,7 +72,10 @@ export default async function MoviePage({ params }: Props) {
           </div>
         </div>
       </div>
-      <div className="">
+      <div className="max-w-auto container md:max-w-[854px] md:px-1 md:py-6">
+        <h1 className="mb-2 text-center text-3xl">
+          Trailers and sneak peeks of {movie.title}
+        </h1>
         <VideoCarousel content={movieTrailer.results} />
       </div>
     </section>

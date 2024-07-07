@@ -14,17 +14,17 @@ interface Props {
 
 export default function VideoCarousel({ content }: Props) {
   return (
-    <div className="container relative mx-auto md:px-1 md:py-6">
+    <div className="">
       <Carousel className="md:mx-12">
         {content && (
           <>
             <CarouselContent>
               {content.map((item: any, index: number) => (
-                <CarouselItem key={index} className="relative flex">
+                <CarouselItem key={index} className="relative w-auto">
                   <div key={index} className="">
                     <iframe
                       src={`https://www.youtube.com/embed/${item.key}`}
-                      className="h-[40vh] w-[40vw] rounded-xl border-2 border-persianred md:h-[421px] md:w-[750px]"
+                      className="rounded-xl border-2 border-persianred md:h-[421px] md:w-[750px]"
                     />
                   </div>
                 </CarouselItem>
