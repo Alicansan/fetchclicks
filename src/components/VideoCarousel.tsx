@@ -6,7 +6,7 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "./carousel";
+} from "./ui/carousel";
 
 interface Props {
   content: any;
@@ -14,7 +14,7 @@ interface Props {
 
 export default function VideoCarousel({ content }: Props) {
   return (
-    <div className="">
+    <div className="select-none">
       <Carousel className="md:mx-12">
         {content && (
           <>

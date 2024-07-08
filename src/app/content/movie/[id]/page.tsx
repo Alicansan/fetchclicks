@@ -1,7 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
-import ImageCarousel from "@/components/ui/ImageCarousel";
-import VideoCarousel from "@/components/ui/VideoCarousel";
-import { MovieResult, TrailerResponse } from "@/types";
+
+import Castcrew from "@/components/Castcrew";
+import ImageCarousel from "@/components/ImageCarousel";
+import VideoCarousel from "@/components/VideoCarousel";
+import { CastResult, MovieResult, TrailerResponse } from "@/types";
 import { cache } from "react";
 
 interface Props {
@@ -12,28 +14,40 @@ interface Props {
 
 // Cache results to avoid multiple fetches
 const fetchMovieData = cache(async (movieId: string) => {
-  const [movieData, movImgResponse, movTrailerResponse] = await Promise.all([
-    fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}?api_key=${process.env.API_KEY}`,
-    ),
-    fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}/images?api_key=${process.env.API_KEY}`,
-    ),
-    fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${process.env.API_KEY}`,
-    ),
-  ]);
+  const [movieData, movImgResponse, movTrailerResponse, castResponse] =
+    await Promise.all([
+      fetch(
+        `https://api.themoviedb.org/3/movie/${movieId}?api_key=${process.env.API_KEY}`,
+      ),
+      fetch(
+        `https://api.themoviedb.org/3/movie/${movieId}/images?api_key=${process.env.API_KEY}`,
+      ),
+      fetch(
+        `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${process.env.API_KEY}`,
+      ),
+      fetch(
+        `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${process.env.API_KEY}`,
+      ),
+    ]);
 
   const movie = (await movieData.json()) as MovieResult;
   const movieImages = await movImgResponse.json();
   const movieTrailer = (await movTrailerResponse.json()) as TrailerResponse;
+  const cast = (await castResponse.json()) as CastResult;
 
-  return { movie, movieImages, movieTrailer };
+  return { movie, movieImages, movieTrailer, cast };
 });
 
 export default async function MoviePage({ params }: Props) {
   const movieId = params.id;
-  const { movie, movieImages, movieTrailer } = await fetchMovieData(movieId);
+  const { movie, movieImages, movieTrailer, cast } =
+    await fetchMovieData(movieId);
+  const crewCastDirector: any = cast?.crew?.filter(
+    (cast) => cast.job === "Director",
+  );
+  const crewCastWriter: any = cast?.crew?.filter(
+    (cast) => cast.job === "Writer",
+  );
 
   return (
     <section className="mx-auto">
@@ -67,13 +81,30 @@ export default async function MoviePage({ params }: Props) {
               </p>
             </div>
             <div>
+              <p>
+                Director:{" "}
+                {crewCastDirector.map((director: any) => (
+                  <span key={director.id}>{director.name} </span>
+                ))}
+              </p>
+              <p>
+                Writer:{" "}
+                {crewCastWriter.map((writer: any) => (
+                  <span key={writer.id}>{writer.name} </span>
+                ))}
+              </p>
+            </div>
+            <div>
               <p className="mb-6 p-2 text-lg">{movie.overview}</p>
             </div>
           </div>
         </div>
       </div>
+      <div>
+        <Castcrew cast={cast}></Castcrew>
+      </div>
       <div className="max-w-auto container md:max-w-[854px] md:px-1 md:py-6">
-        <h1 className="mb-2 text-center text-3xl">
+        <h1 className="mb-2 mt-5 text-center text-3xl">
           Trailers and sneak peeks of {movie.title}
         </h1>
         <VideoCarousel content={movieTrailer.results} />
