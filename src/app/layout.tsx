@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Bebas_Neue, Oswald } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header";
-import Foooter from "@/components/footer";
+import Foooter from "@/components/Footer";
 
 const bebas = Bebas_Neue({
   weight: "400",
