@@ -31,8 +31,10 @@ export default function RootLayout({
     <html lang="en" className={`${bebas.variable} ${oswald.variable}`}>
       <body className="">
         <Header />
-        <main>{children}</main>
-        <Footer />
+        <main>
+          {children}
+          <Footer />
+        </main>
       </body>
     </html>
   );

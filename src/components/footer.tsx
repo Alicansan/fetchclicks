@@ -189,11 +189,10 @@ export default function Footer() {
       {/* <!--Copyright section--> */}
       <div className="p-6 text-center">
         <span>© 2024 Copyright:</span>{" "}
-        <a
-          className="font-semibold dark:text-neutral-400"
-          href="https://tw-elements.com/"
-        >
-          FETCHCLICKS
+        <a className="font-semibold dark:text-neutral-400" href="/">
+          <p className="mt-1 inline text-2xl font-semibold tracking-[2px] [text-shadow:_5px_5px_0_rgb(0_0_0_/_90%)]">
+            FETCHCLICKS
+          </p>
         </a>
       </div>
     </footer>
