@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Bebas_Neue, Oswald } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/header";
+import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 const bebas = Bebas_Neue({
@@ -19,7 +19,7 @@ const oswald = Oswald({
 
 export const metadata: Metadata = {
   title: "FETCHCLICKS",
-  description: "Not A Witty Title isn't it?",
+  description: "Not a witty title isn't it?",
 };
 
 export default function RootLayout({
