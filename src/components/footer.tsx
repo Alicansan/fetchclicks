@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 import { FaPlayCircle } from "react-icons/fa";
 
-export default function App() {
+export default function Footer() {
   return (
     <footer className="container text-center lg:text-left">
       <div className="flex items-center justify-center border-t-2 border-champagnepink p-6 lg:justify-between">
