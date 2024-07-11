@@ -14,14 +14,14 @@ interface Props {
 
 export default function VideoCarousel({ content }: Props) {
   return (
-    <div className="select-none">
-      <Carousel className="md:mx-12">
+    <div className="mb-6 select-none">
+      <Carousel className="items-center">
         {content && (
           <>
-            <CarouselContent>
+            <CarouselContent className="">
               {content.map((item: any, index: number) => (
-                <CarouselItem key={index} className="relative w-auto">
-                  <div key={index} className="">
+                <CarouselItem key={index} className="relative">
+                  <div key={index}>
                     <iframe
                       src={`https://www.youtube.com/embed/${item.key}`}
                       className="rounded-xl border-2 border-persianred md:h-[421px] md:w-[750px]"

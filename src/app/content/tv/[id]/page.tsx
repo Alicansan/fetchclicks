@@ -3,7 +3,7 @@
 import Castcrew from "@/components/Castcrew";
 import ImageCarousel from "@/components/ImageCarousel";
 import VideoCarousel from "@/components/VideoCarousel";
-import { CastResult, MovieResult, TrailerResponse } from "@/types";
+import { CastResult, TvResult, TrailerResponse } from "@/types";
 import { cache } from "react";
 
 interface Props {
@@ -30,7 +30,7 @@ const fetchTvData = cache(async (tvId: string) => {
       ),
     ]);
 
-  const tv = (await tvData.json()) as MovieResult;
+  const tv = (await tvData.json()) as TvResult;
   const tvImages = await tvImgResponse.json();
   const tvTrailer = (await tvTrailerResponse.json()) as TrailerResponse;
   const cast = (await castResponse.json()) as CastResult;
@@ -63,7 +63,7 @@ export default async function MoviePage({ params }: Props) {
           />
           <div className="mr-12 mt-12 flex flex-col items-center justify-between gap-2 lg:items-end">
             <div className="items-centergap-2 flex flex-col lg:items-end">
-              <h1 className="text-4xl font-bold">{tv.title}</h1>
+              <h1 className="text-4xl font-bold">{tv.name}</h1>
 
               <div className="flex flex-wrap gap-2">
                 {tv.genres.map((genre) => (
@@ -86,12 +86,15 @@ export default async function MoviePage({ params }: Props) {
           </div>
         </div>
       </div>
-      <div>
-        <Castcrew cast={cast}></Castcrew>
-      </div>
       <div className="max-w-auto container md:max-w-[854px] md:px-1 md:py-6">
-        <h1 className="mb-2 mt-5 text-center text-3xl">Videos of {tv.title}</h1>
+        <h1 className="mb-4 mt-5 text-center text-3xl">
+          Trailers and sneak peeks of {tv.name}
+        </h1>
         <VideoCarousel content={tvTrailer.results} />
+      </div>
+      <div className="container my-6 border-t-2 border-champagnepink">
+        <h1 className="my-6 text-center text-2xl">Cast of {tv.name}</h1>
+        <Castcrew cast={cast}></Castcrew>
       </div>
     </section>
   );

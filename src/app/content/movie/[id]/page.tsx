@@ -100,14 +100,16 @@ export default async function MoviePage({ params }: Props) {
           </div>
         </div>
       </div>
-      <div>
-        <Castcrew cast={cast}></Castcrew>
-      </div>
+
       <div className="max-w-auto container md:max-w-[854px] md:px-1 md:py-6">
-        <h1 className="mb-2 mt-5 text-center text-3xl">
+        <h1 className="mb-4 mt-5 text-center text-3xl">
           Trailers and sneak peeks of {movie.title}
         </h1>
         <VideoCarousel content={movieTrailer.results} />
+      </div>
+      <div className="container my-6 border-t-2 border-champagnepink">
+        <h1 className="my-6 text-center text-2xl">Cast of {movie.title}</h1>
+        <Castcrew cast={cast}></Castcrew>
       </div>
     </section>
   );
