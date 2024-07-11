@@ -8,7 +8,7 @@ interface CastProps {
 
 const Castcrew = ({ cast }: CastProps) => {
   return (
-    <div className="grid grid-cols-5 gap-4">
+    <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
       {cast &&
         cast.cast.slice(0, 15).map((item: any, index: number) => (
           <div key={index} className="flex flex-col items-center shadow-2xl">

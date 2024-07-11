@@ -59,7 +59,7 @@ export default async function MoviePage({ params }: Props) {
           <img
             className="h-auto w-auto"
             src={`https://image.tmdb.org/t/p/w500/${tv.poster_path}`}
-            alt={tv.title}
+            alt={tv.name}
           />
           <div className="mr-12 mt-12 flex flex-col items-center justify-between gap-2 lg:items-end">
             <div className="items-centergap-2 flex flex-col lg:items-end">
