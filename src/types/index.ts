@@ -101,34 +101,57 @@ export interface MultiSearchResponse {
 }
 
 export interface PersonResult {
-  id: number;
-  name: string;
-  original_name: string;
-  media_type: string;
   adult: boolean;
-  popularity: number;
+  also_known_as: string[];
+  biography: string;
+  birthday: Date;
+  deathday: null;
   gender: number;
+  homepage: null;
+  id: number;
+  imdb_id: string;
   known_for_department: string;
-  profile_path: null | string;
-  known_for: KnownFor[];
+  name: string;
+  place_of_birth: string;
+  popularity: number;
+  profile_path: string;
+  media_type: null | MediaType;
 }
 
-export interface KnownFor {
-  backdrop_path: string;
+export interface PersonImagesResult {
   id: number;
-  title: string;
-  original_title: string;
-  overview: string;
-  poster_path: string;
-  media_type: string;
-  adult: boolean;
-  original_language: string;
-  genre_ids: number[];
-  popularity: number;
-  release_date: string;
-  video: boolean;
+  profiles: Profile[];
+}
+
+export interface Profile {
+  aspect_ratio: number;
+  height: number;
+  iso_639_1: null;
+  file_path: string;
   vote_average: number;
   vote_count: number;
+  width: number;
+}
+
+export interface PersonCreditsResult {
+  cast: Cast[];
+
+  id: number;
+}
+export interface Cast {
+  adult: boolean;
+  backdrop_path: null | string;
+  genre_ids: number[];
+  id: number;
+  original_language: OriginalLanguage;
+  original_title?: string;
+  overview: string;
+  release_date?: string;
+  title?: string;
+  characters: string;
+  media_type: MediaType;
+  names?: string;
+  poster_path: string;
 }
 
 export interface Backdrop {

@@ -56,16 +56,20 @@ export default async function MoviePage({ params }: Props) {
           className="-z-10 hidden h-full w-full brightness-[0.2] lg:absolute lg:flex"
           content={movieImages.backdrops?.slice(0, 5)}
         />
-        <div className="container relative grid grid-cols-1 justify-center lg:grid-cols-2 lg:justify-around">
+        <div className="items-cend container relative grid grid-cols-1 justify-center lg:grid-cols-2 lg:justify-around">
           <img
-            className="h-auto w-auto"
+            className="mx-auto h-auto w-auto"
             src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
             alt={movie.title}
           />
           <div className="mr-12 mt-12 flex flex-col items-center justify-between gap-2 lg:items-end">
-            <div className="items-centergap-2 flex flex-col lg:items-end">
-              <h1 className="text-4xl font-bold">{movie.title}</h1>
-              <span>Released on {movie.release_date.toString()}</span>
+            <div className="flex flex-col items-center gap-2 lg:items-end">
+              <h1 className="flex items-center text-center text-4xl font-bold">
+                {movie.title}
+              </h1>
+              <p className="text-center">
+                Released on {movie.release_date.toString()}
+              </p>
               <div className="flex flex-wrap gap-2">
                 {movie.genres.map((genre) => (
                   <span

@@ -18,10 +18,10 @@ export default function VideoCarousel({ content }: Props) {
       <Carousel className="items-center">
         {content && (
           <>
-            <CarouselContent className="">
+            <CarouselContent>
               {content.map((item: any, index: number) => (
                 <CarouselItem key={index} className="relative">
-                  <div key={index}>
+                  <div key={index} className="flex justify-center">
                     <iframe
                       src={`https://www.youtube.com/embed/${item.key}`}
                       className="rounded-xl border-2 border-persianred md:h-[421px] md:w-[750px]"
