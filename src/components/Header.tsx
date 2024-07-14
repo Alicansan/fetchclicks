@@ -52,9 +52,6 @@ const Header = () => {
           }`}
         >
           <nav className="mt-10 flex flex-col items-center text-2xl">
-            <Link href={"/"}>Trending</Link>
-            <Link href={"/"}>Top Rated</Link>
-            <Link href={"/"}>Series</Link>
             <div className="mt-2">
               <SearchBar />
             </div>
@@ -74,26 +71,7 @@ const Header = () => {
           {/* SEARCH */}
           <SearchBar />
         </div>
-        <nav className="ml-2 mt-3 hidden gap-5 md:flex">
-          <Link
-            href={"/"}
-            className="[text-shadow:_5px_5px_0_rgb(0_0_0_/_90%)]"
-          >
-            Trending
-          </Link>
-          <Link
-            href={"/"}
-            className="text-nowrap [text-shadow:_5px_5px_0_rgb(0_0_0_/_90%)]"
-          >
-            Top Rated
-          </Link>
-          <Link
-            href={"/"}
-            className="[text-shadow:_5px_5px_0_rgb(0_0_0_/_90%)]"
-          >
-            Series
-          </Link>
-        </nav>
+        <nav className="ml-2 mt-3 hidden gap-5 md:flex"></nav>
       </div>
     </header>
   );
