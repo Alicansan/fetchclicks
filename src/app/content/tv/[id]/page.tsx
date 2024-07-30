@@ -94,7 +94,7 @@ export default async function MoviePage({ params }: Props) {
       </div>
       <div className="container my-6 border-t-2 border-champagnepink">
         <h1 className="my-6 text-center text-2xl">Cast of {tv.name}</h1>
-        <Castcrew cast={cast}></Castcrew>
+        <Castcrew cast={cast} />
       </div>
     </section>
   );
