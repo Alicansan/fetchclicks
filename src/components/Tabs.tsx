@@ -11,61 +11,78 @@ const tabItems = [{ title: "Trending" }, { title: "Movie" }, { title: "TV" }];
 const Tabs = () => {
   const [openTab, setOpenTab] = useState(1);
 
+  // Pagination states
+  const [trendingPage, setTrendingPage] = useState(1);
+  const [moviesPage, setMoviesPage] = useState(1);
+  const [tvPage, setTvPage] = useState(1);
+
   const [isLoadingTrendingData, setisLoadingTrendingData] = useState(false);
 
-  const [trendingData, setTrendingData] = useState<TrendingResponse | null>(
-    null,
-  );
-
+  const [trendingData, setTrendingData] = useState<TrendingResponse | null>(null);
   const [movieData, setMovieData] = useState<MovieResponse | null>(null);
-
   const [tvData, setTvData] = useState<TvResponse | null>(null);
 
-  useEffect(() => {
-    const fetchTrending = async () => {
-      try {
-        setisLoadingTrendingData(true);
-        const response = await fetch(
-          "/api/trending", //  Bu veri  api/trending/route.ts dosyasından çekmek için kullanılan bir NExtJS API Route sistemi
-        );
-        const trendingData = (await response.json()) as TrendingResponse;
+  // Fetch trending data with pagination
+  const fetchTrending = async (page = 1, limit = 12) => {
+    try {
+      setisLoadingTrendingData(true);
+      const response = await fetch(`/api/trending?page=${page}&limit=${limit}`);
+      const trendingData = (await response.json()) as TrendingResponse;
 
-        setTrendingData(trendingData);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setisLoadingTrendingData(false);
-      }
-    };
+      setTrendingData(trendingData);
+      setTrendingPage(page);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setisLoadingTrendingData(false);
+    }
+  };
+
+  // Fetch movies data with pagination
+  const fetchMovies = async (page = 1, limit = 12) => {
+    try {
+      const response = await fetch(`/api/movies?page=${page}&limit=${limit}`);
+      const movieData = (await response.json()) as MovieResponse;
+
+      setMovieData(movieData);
+      setMoviesPage(page);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // Fetch TV data with pagination
+  const fetchTv = async (page = 1, limit = 12) => {
+    try {
+      const response = await fetch(`/api/tv?page=${page}&limit=${limit}`);
+      const tvData = (await response.json()) as TvResponse;
+      
+      setTvData(tvData);
+      setTvPage(page);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // Initial data fetch
+  useEffect(() => {
     fetchTrending();
-  }, []);
-
-  useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        const response = await fetch("/api/movies");
-        const movieData = (await response.json()) as MovieResponse;
-
-        setMovieData(movieData);
-      } catch (error) {
-        console.log(error);
-      }
-    };
     fetchMovies();
-  }, []);
-
-  useEffect(() => {
-    const fetchTv = async () => {
-      try {
-        const response = await fetch("/api/tv");
-        const tvData = (await response.json()) as TvResponse;
-        setTvData(tvData);
-      } catch (error) {
-        console.log(error);
-      }
-    };
     fetchTv();
   }, []);
+
+  // Pagination handlers
+  const handleTrendingPagination = (newPage: number) => {
+    fetchTrending(newPage);
+  };
+
+  const handleMoviesPagination = (newPage: number) => {
+    fetchMovies(newPage);
+  };
+
+  const handleTvPagination = (newPage: number) => {
+    fetchTv(newPage);
+  };
 
   return (
     <>
@@ -92,18 +109,74 @@ const Tabs = () => {
                   {isLoadingTrendingData ? (
                     <p>Loading</p>
                   ) : (
-                    trendingData && <Trending trendingData={trendingData} />
+                    trendingData && (
+                      <>
+                        <Trending trendingData={trendingData} />
+                        <div className="flex justify-center mt-4 space-x-4">
+                          <button 
+                            onClick={() => handleTrendingPagination(trendingPage - 1)}
+                            disabled={trendingPage === 1}
+                            className="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
+                          >
+                            Previous
+                          </button>
+                          <button 
+                            onClick={() => handleTrendingPagination(trendingPage + 1)}
+                            disabled={!trendingData.total_pages || trendingPage >= trendingData.total_pages}
+                            className="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
+                          >
+                            Next
+                          </button>
+                        </div>
+                      </>
+                    )
                   )}
                 </div>
                 <div className={openTab === 2 ? "block" : "hidden"}>
-                  {movieData ? (
-                    <Movies movieData={movieData} />
-                  ) : (
-                    <p>Loading</p>
+                  {movieData && (
+                    <>
+                      <Movies movieData={movieData} />
+                      <div className="flex justify-center mt-4 space-x-4">
+                        <button 
+                          onClick={() => handleMoviesPagination(moviesPage - 1)}
+                          disabled={moviesPage === 1}
+                          className="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
+                        >
+                          Previous
+                        </button>
+                        <button 
+                          onClick={() => handleMoviesPagination(moviesPage + 1)}
+                          disabled={!movieData.total_pages || moviesPage >= movieData.total_pages}
+                          className="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
+                        >
+                          Next
+                        </button>
+                      </div>
+                    </>
                   )}
                 </div>
                 <div className={openTab === 3 ? "block" : "hidden"}>
-                  {tvData ? <Tv tvData={tvData} /> : <p>Loading</p>}
+                  {tvData && (
+                    <>
+                      <Tv tvData={tvData} />
+                      <div className="flex justify-center mt-4 space-x-4">
+                        <button 
+                          onClick={() => handleTvPagination(tvPage - 1)}
+                          disabled={tvPage === 1}
+                          className="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
+                        >
+                          Previous
+                        </button>
+                        <button 
+                          onClick={() => handleTvPagination(tvPage + 1)}
+                          disabled={!tvData.total_pages || tvPage >= tvData.total_pages}
+                          className="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
+                        >
+                          Next
+                        </button>
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
